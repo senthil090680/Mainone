@@ -1,0 +1,2 @@
+module PosmTypesHelper
+end

@@ -1,0 +1,3 @@
+class KdDetailsController < ApplicationController
+ 
+end

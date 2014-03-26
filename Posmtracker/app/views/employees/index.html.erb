@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			POSM Tracker
+		</title>
+      
+	    <meta charset="utf-8" />
+	    <link type="text/css" rel="stylesheet" href="css/styles.css" />
+	<!-- 	    <link type="text/css" rel="stylesheet" href="css/svwp_style.css" /> -->
+	<link type="text/css" rel="stylesheet" href="css/galleria.classic.css" />
+	<script type="text/javascript" src="javascript/jquery-2.0.2.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	<script type="text/javascript" src="js/tracker.js"></script>
+	<script type="text/javascript" src="js/gallery.js"></script>
+	<script type="text/javascript" src="js/http_req.js"></script>
+	<script type="text/javascript" src="js/tag_an_image.js"></script>
+	<script type="text/javascript" src="js/map_details.js"></script>
+	<script type="text/javascript" src="js/filters.js"></script>
+	<script type="text/javascript" src="js/Current_date.js"></script>
+	<script type="text/javascript" src="js/user_auth.js"></script>
+	<link href="css/rateit.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="javascript/jquery.raty.min.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.slideViewerPro.1.5.js"></script> -->
+	<script type="text/javascript" src="js/upload_image.js"></script>
+	<script type="text/javascript" src="javascript/galleria-1.2.9.min.js"></script>
+	<script type="text/javascript" src="js/galleria.classic.min.js"></script>   
+	<script type="text/javascript" src="javascript/binaryajax.js"></script>    
+	<script type="text/javascript" src="javascript/exif.js"></script>   
+	 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+ 		 <script src="javascript/jquery.timepicker.js"></script>
+       <link rel="stylesheet" href="javascript/jquery.timepicker.css" />
+	
+  
+	</head>
+	    <body>
+	    	<div class="container">
+            <div class="top_div">
+                <span id="top-left">POSm Tracker</span>
+                <a href="#"><img src="img/add_photos.png" id="add-pic" onclick="upload()"/></a>
+                <span class="view_set">
+                	<img src="img/grid.png" id="grid">
+                    <img src="img/album.png" id="album" style="padding-top: 7px">
+                </span>
+                <a href="#"><span id="create_new_employee">Create New User</span></a>
+                <span id="viewer"></span>
+                <a href="#"><img src="img/log_out.png" id="log_out" /></a>
+            </div>
+            <div class="left_div">
+                <div class="gallery">
+                    <div id="grid_view">
+                        <div id="container">
+                          <!--   <a href="img/Achievements.jpg"><img src="thumb/Achievements.jpg" /></a>
+                            <a href="img/Bw.jpg"><img src="thumb/Bw.jpg" /></a>
+                            <a href="img/Camera.jpg"><img src="thumb/Camera.jpg" /></a><br />
+                            <a href="img/Cat-Dog.jpg"><img src="thumb/Cat-Dog.jpg" /></a>
+                            <a href="img/CREATIV.jpg"><img src="thumb/CREATIV.jpg" /></a>
+                            <a href="img/creativ2.jpg"><img src="thumb/creativ2.jpg" /></a><br />
+                            <a href="img/Earth.jpg"><img src="thumb/Earth.jpg" /></a>
+                            <a href="img/Endless.jpg"><img src="thumb/Endless.jpg" /></a>
+                            <a href="img/EndlesSlights.jpg"><img src="thumb/EndlesSlights.jpg" /></a> -->
+                        </div>
+                    </div>
+                    <div id="album_view">
+						<div id="my-folio-of-works" class="svwp">
+							<!-- <ul>
+								<li><div id="1" class="alb-img"><img src="img/Camera.jpg" /></div></li>
+        						<li><div id="2" class="alb-img"><img src="img/Earth.jpg" /></div></li>
+						        <li><div id="3" class="alb-img"><img src="img/genesis.jpg" /></div></li>
+						        <li><div id="4" class="alb-img"><img src="img/green.jpg" /></div></li>
+						        <li><div id="5" class="alb-img"><img src="img/green.jpg" /></div></li>
+						        <li><div id="6" class="alb-img"><img src="img/green.jpg" /></div></li>
+						        <li><div id="7" class="alb-img"><img src="img/Camera.jpg" /></div></li>
+        						<li><div id="8" class="alb-img"><img src="img/Earth.jpg" /></div></li>
+						        <li><div id="9" class="alb-img"><img src="img/genesis.jpg" /></div></li>
+						        <li><div id="10" class="alb-img"><img src="img/green.jpg" /></div></li>
+							</ul> -->
+						</div>
+						
+                    </div>
+
+                </div>
+            </div> 
+            <div class="right_div">
+                <div id="map_canvas">
+
+                </div>
+                <div class="info">
+                	<p id="show_p_details">
+                	Picture by : <br />
+                	28 July, 2013 | 5.00pm<br />
+                	<br />
+                	
+                	</p>
+                </div>
+                <hr id="right-line">
+                <div class="filter_div">
+                	<div class="filter">
+						<span class="add_filter_img">
+							Filters
+						</span>
+						<a href="#"><img src="img/saved-filters.png" id="saved_filter" onclick="open_Savedfilter()" /></a>
+					</div>
+					<div class="filter_types">
+						<div class="filter_div"></div>
+					</div>
+					<div class="fiter_tags tog">
+						<!-- <div class="filter_t">
+							 <span>City | </span> 
+							 <select class="filter_select">
+								<option>Chennai</option>
+								<option>Madurai</option>
+								<option>Coimbatore</option>
+								<option>Trichy</option>
+							</select> 
+						<img src="img/tag-close.png"  class="tag-close"/>
+						</div> -->
+						
+						<div class="filter_t filter_t1">
+							<div class="filter_type">Principal</div>
+							<select class="filter_select" id="year_picker" onchange="filter_change()">
+								<option>2013</option>
+								<option>2012</option>
+								<option>2011</option>
+							</select>
+						<img src="img/tag-close.png"  class="tag-close" id="tag-close3" onclick="toggle_close(3)"/>
+						</div>
+						
+						<div class="filter_t filter_t3">
+							<div class="filter_type">Brand</div>
+							<select class="filter_select" id="brand_picker" onchange="filter_change()">
+								<option>Pepsi</option>
+								<option>Coke</option>
+								<option>Thumbs_up</option>
+							</select>
+						<img src="img/tag-close.png"  class="tag-close" id="tag-close2" onclick="toggle_close(2)"/>
+						</div>
+						
+						<div class="filter_t filter_t2">
+							<div class="filter_type">POSm</div>
+							<select class="filter_select" id="posm_type_picker" onchange="filter_change()">
+								<option>Banner</option>
+								<option>Stand</option>
+								<option>Fridge</option>
+							</select>
+						<img src="img/tag-close.png"  class="tag-close" id="tag-close1" onclick="toggle_close(1)"/>
+				<!-- <img src="img/2013-05-18 11.59.18.jpg"  class="tag-close" id="tag-close1" onclick="toggle_close(1)"/> -->						</div>
+						
+						
+						<div class="filter_t filter_t4">
+							<div class="filter_type">Image by</div>
+							
+							<select class="filter_select" id="sr_picker" onchange="filter_change()">
+								<option>Magesh.S</option>
+								<option>Raj</option>
+								<option>Ram</option>
+							</select>
+						<img src="img/tag-close.png"  class="tag-close" id="tag-close4" onclick="toggle_close(4)"/>
+						</div>
+						<div class="filter_t filter_t4">
+							<div class="filter_type">Ratings</div>
+							
+							<select class="filter_select" id="rate_picker" onchange="filter_change()">
+								<option value=""></option>
+								<option value="1">1 star</option>
+								<option value="2">2 star</option>
+								<option value="3">3 star</option>
+								<option value="4">4 star</option>
+								<option value="5">5 star</option>
+							</select>
+						<img src="img/tag-close.png"  class="tag-close" id="tag-close4" onclick="toggle_close(4)"/>
+						</div>
+						
+						<div class="filter_t filter_t12">
+							<div class="filter_type filter_type1">Datetime</div>
+							
+							<span id="savefilters_created_at" class="filter_select"> Datetime </span>
+						<img src="img/tag-close.png"  class="tag-close" id="tag-close5" onclick="toggle_close(4)"/>
+						</div>
+						<!-- <span class="rating_style filter_t4" >Ratings Above</span>
+						<div class="maxrating">
+							
+						</div> -->
+					</div>
+					<div class="filter_option">
+						<a href="#"><span id="save" onclick="open_save_dialog()"><img src="img/save_icon.png" /></span></a>
+						<a href="#"><img src="img/clear-icon.png" class="clear_all_img" /></a>
+					</div>
+					
+                </div>
+            </div>
+            <div class="add-info pop">
+            	<div class="grey-scale">
+            	</div>
+            			<div class="box box1" id="dialog-form" >
+							<img src="img/close.png" class="close" />
+						        <label for="name">Tag the picture</label>
+<!-- 						        <div id="show_tag_list"> -->
+							        <!-- <div class="show_filters">
+							        <div class="material">
+								        <select>
+								        	<option>POSm</option>
+								        	<option>Coke opener</option>
+								        	<option>Pepsi stand</option>
+								        </select>
+								         
+								    </div>
+								    
+							        <div class="select_brand">
+								        <select>
+								        	<option>Brand Name</option>
+								        	<option>Coke</option>
+								        	<option>Pepsi</option>
+								        </select>							       
+								    </div>
+							    </div> -->
+							    <!-- </div> -->
+<!-- 							<img src="img/add_more.png" class="add_more" />     -->
+							<button class="done">Done</button>
+						</div>
+			</div>
+			<div class="review pop">
+				<div class="review_div_out grey-scale">
+				</div>
+				<div class="review_div box box4">
+					<img src="img/close.png" class="close" />
+					<label>Rate & Review</label>
+					<div id="review_img_back" ><img src="#" id="review_img"/></div>
+		            <div class="right_review_div">
+						<div id="rating_star">
+						</div>
+			               <textarea id="text_block" placeholder="Review"></textarea>
+			            	<button class="done1" id="rating_review_done">Done</button>
+						</div>
+					</div>
+			</div>
+			
+			
+			<div class="save_pop pop">
+				<div class="save_div_out grey-scale">
+				</div>
+				<div class="save_div box">
+					<img src="img/close.png" class="close" />
+					<label>Filter Name</label>
+		               <input type="text" id="Saving_name">
+		            <button class="save_button" id="save_button">Done</button>
+				</div>
+			</div>
+			
+			
+			<div class="upload_image pop">
+				<div class="upload_image_div_out grey-scale">
+				</div>
+				<div class="box upload_image_div">
+					<img src="img/close.png" class="close" />
+					<div class="upload_image_box" onclick="upload_img()" >
+					<form id="upload" method="post" action="" enctype="multipart/form-data">
+			             <div id="drop">
+			             	<img src="img/ajax-loader.gif" class="ajax_loader"/>
+			             	<img id="blah" exif="true" src="#" alt="your image" />
+			             	<img src="img/Text_Upload.png" id="text_upload" />
+			             	<input type="file" accept="image/x-png,image/png, image/gif, image/jpeg" name="upl" multiple id="upload_button" />
+			             	
+			             </div>
+			             
+		             </form>
+		            </div>
+		             <input type="text" id="date">
+            		<input type="text" id="time">
+		            <div class="upload_info">
+			            <div class="add_location">
+			            	<img src="img/Pointer.png" id="locator" />
+			            	<input type="text" id="customer_select_option1" placeholder="Customer Name"/>
+			            	<!-- <select id="customer_select_option">
+			            		<option>madurai</option>
+			            		<option>chennai</option>
+			            		<option>coimbatore</option>
+			            	</select> -->
+			            	<a href="#">
+				            	<div class="upload_button">
+				            		<p>Done</p>
+				            		
+				            	</div>
+				            </a>
+				            
+			            </div>
+				            <textarea id='upload_textarea' placeholder="About"></textarea>
+			        </div>
+				</div>
+			</div>
+			
+			<!-- <% flash.each do |key, msg| %>
+			    <%= content_tag :div, msg, :class => [key, " message"], :id => "notice_#{key}" %>
+			<% end %>
+			<% form_tag '/upload/create', { :multipart => true } do %>
+			    <p>
+			    <%= file_field_tag 'upload[file]' %>
+			    </p>
+			    <p>
+			    	<%= submit_tag "Upload" %>
+			    </p>
+			<% end %> -->
+			
+			<div class="saved_filter_pop pop">
+				<div class="saved_filter_div_out grey-scale">
+				</div>
+				<div class="saved_filter_div box">
+					<img src="img/close.png" class="close" />
+		             <h3>Saved Filters</h3>
+		             <hr />
+		             <div class="saved_filter_list" id="saved_filter_list">
+		             	<ul id='ul_list'>
+		             		<li><a href="#">stand pics</a></li>
+		             		<li><a href="#">Samson banner pics</a></li>
+		             		<li><a href="#">Samuel coupon pics</a></li>
+		             		<li><a href="#">Sameer poster pics</a></li>
+		             	</ul>
+		             </div>
+		             <hr />
+				</div>
+			</div>
+			
+			<div class="login">
+            	<div class="grey">
+            	</div>
+            	<div class="login_div">
+            		<p>POSm Tracker</p>
+            		<div>
+            		
+	            		<input type="text" placeholder="User Name" id="usr_name" />
+	            		<input type="password"  placeholder="Password" id="password" />
+	            		<input type="submit" value="Login" id="login_button">
+	            		
+	            	</div>
+            	</div>
+			</div>		
+			
+			
+			<div class="about pop">
+				<div class="about_out grey-scale">
+				</div>
+				<div class="about_box box box3">
+					<img src="img/close.png" class="close" />
+		             <h3>About The Image</h3>
+		             <div id="about_img_back" ><img src="#" id="about_img"/></div>
+		             <textarea id="about_content" readonly></textarea>
+				</div>
+			</div>
+				
+			<div class="create_new_user pop">
+				<div class="create_new_user_out grey-scale">
+				</div>
+				<div class="create_new_user_box box box2">
+					<img src="img/close.png" class="close" />
+		             <h3>Create New User</h3>
+		             <div class="create_new_user_content">
+		             	<div class="list__"><span>Employee code </span><input type="text" placeholder="Employee code" id="employee_code"/></div>
+		             	<div class="list__"><span>Name</span><input type="text" placeholder="Employee Name" id="employee_name"/></div>
+		             	<div class="list__"><span>Password </span><input type="password" placeholder="Password" id="employee_password"/></div>
+		             	<div class="list__"><span>Confirm Password </span><input type="password" placeholder="Confirm Password" id="employee_confirm_pwd"/></div>
+		             	<div class="list__"><span>Employee Role</span>
+		             		<div class="list__div">
+		             				<select class="filter_select employee_role">
+		             					<option value></option>
+		             					<option value="READ ONLY">READ ONLY</option>
+		             					<option value="EDITABLE">EDITABLE</option>
+		             					<option value="EDIT_UPLOAD">EDIT UPLOAD</option>
+		             					
+		             					
+		             				</select>
+		             		</div>
+		             	</div>
+		             	<div class="save_new_user">Save</div>
+		             </div>
+				</div>
+			</div>
+					
+							
+			
+		
+    	</div>
+    </body>
+ </html> 

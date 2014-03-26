@@ -1,0 +1,2 @@
+module ImagesMultiBrandsHelper
+end

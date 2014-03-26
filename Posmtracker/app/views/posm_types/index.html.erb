@@ -1,0 +1,21 @@
+<h1>Listing posm_types</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @posm_types.each do |posm_type| %>
+  <tr>
+    <td><%= link_to 'Show', posm_type %></td>
+    <td><%= link_to 'Edit', edit_posm_type_path(posm_type) %></td>
+    <td><%= link_to 'Destroy', posm_type, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Posm type', new_posm_type_path %>

@@ -1,0 +1,4 @@
+open tracker.fmclgrp.com
+tracker
+Tr3vT5$B2NG
+cd /public_html/pictures

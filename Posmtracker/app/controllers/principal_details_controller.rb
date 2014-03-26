@@ -1,0 +1,5 @@
+class PrincipalDetailsController < ApplicationController
+  
+  
+  
+end

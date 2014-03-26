@@ -1,0 +1,21 @@
+<h1>Listing branch_details</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @branch_details.each do |branch_detail| %>
+  <tr>
+    <td><%= link_to 'Show', branch_detail %></td>
+    <td><%= link_to 'Edit', edit_branch_detail_path(branch_detail) %></td>
+    <td><%= link_to 'Destroy', branch_detail, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Branch detail', new_branch_detail_path %>
